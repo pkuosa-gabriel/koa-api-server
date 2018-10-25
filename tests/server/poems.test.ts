@@ -1,5 +1,6 @@
 import Debug from 'debug';
 import request from 'supertest';
+import uuid from 'uuid';
 import knex from '../../src/server/db/connection';
 import server from '../../src/server/index';
 
@@ -50,5 +51,17 @@ describe('routes: poems', () => {
     expect(response.status).toEqual(404);
     expect(response.type).toEqual('application/json');
     expect(response.body.message).toEqual('The poem does not exist.');
+  });
+
+  test('POST a poem via /api/v1/poems', async () => {
+    const response = await request(server)
+      .post('/api/v1/poems')
+      .send({name: 'Test' + uuid.v1(), author: 'Test Author', votes: 6});
+    expect(response.status).toEqual(201);
+    expect(response.type).toEqual('application/json');
+    debug(response.body.data);
+    expect(Object.keys(response.body.data[0]).sort()).toEqual(
+      ['id', 'name', 'author', 'votes'].sort(),
+    );
   });
 });

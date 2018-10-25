@@ -31,6 +31,22 @@ poemsRouter
       debug('Error: ', err);
       ctx.status = 404;
     }
+  })
+  .post(BASE_URL, async ctx => {
+    debug(`Receive POST on ${BASE_URL}`);
+    try {
+      const poem = await queries.addPoem(ctx.request.body);
+      if (poem.length) {
+        ctx.status = 201;
+        ctx.body = {status: 'success', data: poem};
+      } else {
+        ctx.status = 400;
+        ctx.body = {status: 'error', message: 'Something went wrong.'};
+      }
+    } catch (err) {
+      debug('Error: ', err);
+      ctx.status = 400;
+    }
   });
 
 export default poemsRouter;

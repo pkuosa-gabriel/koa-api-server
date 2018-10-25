@@ -1,5 +1,6 @@
 import Debug from 'debug';
 import Koa from 'koa';
+import koaBody from 'koa-body';
 // import koaWebpack from 'koa-webpack';
 // import config from '../../webpack.config';
 import indexRouter from './routes/index';
@@ -16,6 +17,7 @@ const port = process.env.PORT || 3000;
 //   });
 // }
 
+app.use(koaBody());
 app.use(indexRouter.routes());
 app.use(poemsRouter.routes());
 

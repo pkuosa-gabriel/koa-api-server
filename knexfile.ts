@@ -37,36 +37,36 @@ export const production = {
   },
 };
 
-// Use SQLite3 for testing
-export const test = {
-  client: 'sqlite3',
-  connection: {filename: './tests/testdb.sqlite3'},
-  migrations: {
-    directory: path.join(BASE_PATH, 'migrations'),
-    extensions: ['js', 'ts'],
-  },
-  pool: {
-    max: 1,
-    min: 1,
-  },
-  seeds: {
-    directory: path.join(BASE_PATH, 'seeds'),
-  },
-};
-
-// // local PostgreSQL
+// // Use SQLite3 for testing
 // export const test = {
-//   client: 'pg',
-//   connection: 'postgres://gabriel@localhost:5432/koa_api_test',
+//   client: 'sqlite3',
+//   connection: {filename: './tests/testdb.sqlite3'},
 //   migrations: {
 //     directory: path.join(BASE_PATH, 'migrations'),
 //     extensions: ['js', 'ts'],
 //   },
 //   pool: {
-//     max: 5,
+//     max: 1,
 //     min: 1,
 //   },
 //   seeds: {
 //     directory: path.join(BASE_PATH, 'seeds'),
 //   },
 // };
+
+// Use local PostgreSQL for testing
+export const test = {
+  client: 'pg',
+  connection: 'postgres://gabriel@localhost:5432/koa_api_test',
+  migrations: {
+    directory: path.join(BASE_PATH, 'migrations'),
+    extensions: ['js', 'ts'],
+  },
+  pool: {
+    max: 5,
+    min: 1,
+  },
+  seeds: {
+    directory: path.join(BASE_PATH, 'seeds'),
+  },
+};

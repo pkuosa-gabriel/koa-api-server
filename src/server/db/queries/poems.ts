@@ -1,5 +1,11 @@
 import knex from '../connection';
 
+function addPoem(poem) {
+  return knex('poems')
+    .insert(poem)
+    .returning('*');
+}
+
 function getAllPoems() {
   return knex('poems').select('*');
 }
@@ -11,6 +17,7 @@ function getSinglePoem(id) {
 }
 
 const queries = {
+  addPoem,
   getAllPoems,
   getSinglePoem,
 };
