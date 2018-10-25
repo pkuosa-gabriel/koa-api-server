@@ -21,6 +21,8 @@ router.get('/*', async ctx => {
 
 app.use(router.routes());
 
-app.listen(port);
+const server = app.listen(port);
 
 debug(`Server running on port ${port}`);
+
+export default server;
