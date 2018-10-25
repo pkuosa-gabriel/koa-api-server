@@ -6,7 +6,7 @@ const router = new Router();
 
 router.get('/', async ctx => {
   debug('Receive GET on /');
-  ctx.body = {status: 'success', message: 'hello, world!'};
+  ctx.body = {status: 'success', message: 'Hello World!'};
 });
 
 export default router;
