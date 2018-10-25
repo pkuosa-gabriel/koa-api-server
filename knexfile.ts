@@ -54,8 +54,8 @@ export const test = {
   },
 };
 
-//// local PostgreSQL
-// test: {
+// // local PostgreSQL
+// export const test = {
 //   client: 'pg',
 //   connection: 'postgres://gabriel@localhost:5432/koa_api_test',
 //   migrations: {
@@ -69,4 +69,4 @@ export const test = {
 //   seeds: {
 //     directory: path.join(BASE_PATH, 'seeds'),
 //   },
-// },
+// };

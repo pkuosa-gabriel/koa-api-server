@@ -53,7 +53,7 @@
     "format": "prettier --write \"**/*.+(js|ts|json|md)\"",
     "test": "NODE_ENV=test jest --coverage",
     "type-check": "tsc --noEmit",
-    "type-check:watch": "yarn type-check -- --watch",
+    "type-check:watch": "yarn type-check --watch",
     "build": "yarn build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",

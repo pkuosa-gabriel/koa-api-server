@@ -4,6 +4,15 @@ function getAllPoems() {
   return knex('poems').select('*');
 }
 
-const queries = {getAllPoems};
+function getSinglePoem(id) {
+  return knex('poems')
+    .select('*')
+    .where({id: parseInt(id, 10)});
+}
+
+const queries = {
+  getAllPoems,
+  getSinglePoem,
+};
 
 export default queries;
