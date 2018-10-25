@@ -1,3 +1,5 @@
+import * as Knex from 'knex';
+
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('poems', table => {
     table.increments();

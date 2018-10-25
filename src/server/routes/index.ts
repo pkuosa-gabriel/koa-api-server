@@ -1,12 +1,12 @@
 import Debug from 'debug';
 import Router from 'koa-router';
 
-const debug = Debug('server:router');
-const router = new Router();
+const debug = Debug('fugacious:index');
+const indexRouter = new Router();
 
-router.get('/', async ctx => {
+indexRouter.get('/', async ctx => {
   debug('Receive GET on /');
   ctx.body = {status: 'success', message: 'Hello World!'};
 });
 
-export default router;
+export default indexRouter;

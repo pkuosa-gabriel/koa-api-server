@@ -1,7 +1,7 @@
 import path from 'path';
 import nodeExternals from 'webpack-node-externals';
 
-module.exports = {
+export = {
   devtool: 'inline-source-map',
   entry: ['@babel/polyfill', './src/server/index'],
   externals: [nodeExternals()],
