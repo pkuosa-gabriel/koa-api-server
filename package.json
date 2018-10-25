@@ -56,11 +56,15 @@
     "build": "yarn build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
-    "bundle": "NODE_ENV=production webpack",
-    "precommit": "lint-staged && yarn type-check"
+    "bundle": "NODE_ENV=production webpack"
   },
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && yarn type-check"
+    }
   }
 }
