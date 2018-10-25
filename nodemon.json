@@ -2,5 +2,5 @@
   "watch": ["src"],
   "ext": "ts",
   "ignore": ["tests/**/*.test.ts"],
-  "exec": "ts-node -O '{\"module\": \"commonjs\"}' ./src/index.ts"
+  "exec": "ts-node -O '{\"module\": \"commonjs\"}' ./src/server/index.ts"
 }

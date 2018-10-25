@@ -1,7 +1,7 @@
 import Debug from 'debug';
 import request from 'supertest';
 
-import server from '../src/index';
+import server from '../../src/server/index';
 
 const debug = Debug('test:index');
 afterEach(() => {

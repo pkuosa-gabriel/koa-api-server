@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
   // Change to your "entry-point".
   mode: process.env.NODE_ENV === 'production' ? 'development' : 'production',
-  entry: ['@babel/polyfill', './src/index'],
+  entry: ['@babel/polyfill', './src/server/index'],
   devtool: 'inline-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
