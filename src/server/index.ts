@@ -1,15 +1,11 @@
 import Debug from 'debug';
 import Koa from 'koa';
-import Router from 'koa-router';
+import router from './routes/index';
 
 const debug = Debug('server:index');
 const app = new Koa();
-const router = new Router();
-const port = process.env.PORT || 3000;
 
-router.get('/*', async ctx => {
-  ctx.body = 'Hello World!';
-});
+const port = process.env.PORT || 3000;
 
 // if (process.env.NODE_ENV === 'development') {
 //   const koaWebpack = require('koa-webpack');

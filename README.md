@@ -6,10 +6,14 @@ A simple RESTful API server based on [koa.js](https://github.com/koajs/koa).
 
 ## Tech Stack
 
-- Typescript
+- Typescript + Babel + Webpack
 - Koa.js
 - PostgreSQL
 - Jest
+- Other tools
+  - lint-staged
+  - husky
+  - prettier
 
 ## References
 
