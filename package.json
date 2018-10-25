@@ -1,0 +1,45 @@
+{
+  "name": "koa-api-server",
+  "version": "0.0.1",
+  "description": "A simple RESTful API server based on koa.js",
+  "main": "src/index.ts",
+  "repository": "git@github.com:pkuosa-gabriel/koa-api-server.git",
+  "author": "Gabriel Wu <qqbbnease1004@126.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "debug": "^4.1.0",
+    "koa": "^2.6.1",
+    "koa-router": "^7.4.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "@types/koa": "^2.0.46",
+    "@types/koa-router": "^7.0.32",
+    "babel-loader": "^8.0.4",
+    "nodemon": "^1.18.4",
+    "prettier": "^1.14.3",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "typescript": "^3.1.3",
+    "webpack": "^4.23.0",
+    "webpack-cli": "^3.1.2"
+  },
+  "scripts": {
+    "dev": "nodemon",
+    "format": "prettier --write \"**/*.+(js|ts|json|md)\"",
+    "test": "jest",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "yarn type-check -- --watch",
+    "build": "yarn build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
+    "bundle": "webpack --mode production"
+  }
+}
