@@ -1,6 +1,8 @@
-const Koa = require('koa');
-const Router = require('koa-router');
-const debug = require('debug')('server:index');
+import Debug from 'debug';
+import Koa from 'koa';
+import Router from 'koa-router';
+
+const debug = Debug('server:index');
 const app = new Koa();
 const router = new Router();
 

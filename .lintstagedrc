@@ -1,6 +1,6 @@
 {
   "linters": {
-    "*.js": [
+    "*.ts": [
       "tslint"
     ],
     "**/*.+(js|ts|json|md)": [
