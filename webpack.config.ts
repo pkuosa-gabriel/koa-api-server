@@ -1,11 +1,15 @@
 import path from 'path';
+import webpack from 'webpack';
 import nodeExternals from 'webpack-node-externals';
 
-export = {
-  devtool: 'inline-source-map',
+const config: webpack.Configuration = {
+  devtool:
+    process.env.NODE_ENV === 'production'
+      ? 'source-map'
+      : '#cheap-module-eval-source-map',
   entry: ['@babel/polyfill', './src/server/index'],
   externals: [nodeExternals()],
-  mode: process.env.NODE_ENV === 'production' ? 'development' : 'production',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   module: {
     rules: [
       {
@@ -18,7 +22,6 @@ export = {
   },
   output: {
     filename: 'server.bundle.js',
-
     path: path.resolve(__dirname, 'dist'),
     publicPath: path.resolve(__dirname, 'public'),
   },
@@ -27,3 +30,5 @@ export = {
   },
   target: 'node',
 };
+
+export default config;

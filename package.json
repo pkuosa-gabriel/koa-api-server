@@ -26,7 +26,6 @@
     "@types/jest": "^23.3.7",
     "@types/koa": "^2.0.46",
     "@types/koa-router": "^7.0.32",
-    "@types/koa-webpack": "^5.0.1",
     "@types/node": "^10.12.0",
     "@types/supertest": "^2.0.6",
     "@types/webpack": "^4.4.17",
@@ -48,6 +47,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
+    "dev": "NODE_ENV=development ts-node -O '{\"module\": \"commonjs\"}' ./src/server/index.ts",
     "start": "NODE_ENV=development nodemon",
     "format": "prettier --write \"**/*.+(js|ts|json|md)\"",
     "test": "NODE_ENV=test jest --coverage",

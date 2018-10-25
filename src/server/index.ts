@@ -1,5 +1,7 @@
 import Debug from 'debug';
 import Koa from 'koa';
+// import koaWebpack from 'koa-webpack';
+// import config from '../../webpack.config';
 import indexRouter from './routes/index';
 import poemsRouter from './routes/poems';
 
@@ -9,11 +11,9 @@ const app = new Koa();
 const port = process.env.PORT || 3000;
 
 // if (process.env.NODE_ENV === 'development') {
-// const koaWebpack = require('koa-webpack');
-// const config = require('../webpack.config');
-// koaWebpack({config}).then(middleware => {
-//   app.use(middleware);
-// });
+//   koaWebpack({config}).then(middleware => {
+//     app.use(middleware);
+//   });
 // }
 
 app.use(indexRouter.routes());
