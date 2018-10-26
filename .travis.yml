@@ -17,7 +17,7 @@ before_deploy: yarn add now@12.0.0-canary.89 --no-save
 
 deploy:
   - provider: script # Run a custom deployment script which we will define below
-    script: now --token $NOW_TOKEN && now alias --token $NOW_TOKEN
+    script: sh deploy/now.sh
     skip_cleanup: true
     on:
       branch: master
