@@ -9,12 +9,15 @@ A simple RESTful API server based on [koa.js](https://github.com/koajs/koa).
 
 - Typescript + Babel + Webpack
 - Koa.js
-- PostgreSQL
+- Knex.js + PostgreSQL
 - Jest
 - Other tools
   - lint-staged
   - husky
   - prettier
+  - codecov
+  - travis (used only for sending code coverage reports)
+  - now
 
 ## References
 
