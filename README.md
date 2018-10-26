@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![codecov](https://codecov.io/gh/pkuosa-gabriel/koa-api-server/branch/master/graph/badge.svg)](https://codecov.io/gh/pkuosa-gabriel/koa-api-server)
-[![codebeat badge](https://codebeat.co/badges/fe291c9f-31d1-4ff6-b9c1-0e3f1f7fb0af)](https://codebeat.co/projects/github-com-pkuosa-gabriel-koa-api-server-master)
+[![codebeat badge](https://codebeat.co/badges/fe291c9f-31d1-4ff6-b9c1-0e3f1f7fb0af)](https://codebeat.co/projects/github-com-pkuosa-gabriel-koa-api-server-master) [![Greenkeeper badge](https://badges.greenkeeper.io/pkuosa-gabriel/koa-api-server.svg)](https://greenkeeper.io/)
 
 A simple RESTful API server based on [koa.js](https://github.com/koajs/koa).
 
