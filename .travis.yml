@@ -13,7 +13,7 @@ cache:
 script:
   - bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json
 
-before_deploy: yarn add now --no-save
+before_deploy: yarn add now@12.0.0-canary.89 --no-save
 
 deploy:
   - provider: script # Run a custom deployment script which we will define below
