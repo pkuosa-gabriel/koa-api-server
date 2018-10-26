@@ -15,6 +15,13 @@ function updatePoem(id, poem) {
     .returning('*');
 }
 
+function deletePoem(id) {
+  return knex('poems')
+    .select('*')
+    .where({id: parseInt(id, 10)})
+    .del();
+}
+
 function getAllPoems() {
   return knex('poems').select('*');
 }
@@ -28,6 +35,7 @@ function getSinglePoem(id) {
 const queries = {
   addPoem,
   updatePoem,
+  deletePoem,
   getAllPoems,
   getSinglePoem,
 };

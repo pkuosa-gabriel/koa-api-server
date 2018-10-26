@@ -3,78 +3,120 @@ import koaBody from 'koa-body';
 
 import Debug from 'debug';
 import Router from 'koa-router';
+import {CODE, MESSAGE} from '../../../common/response';
 import queries from '../db/queries/poems';
 
 const debug = Debug('fugacious:poems');
 const poemsRouter = new Router();
 const BASE_URL = `/api/v1/poems`;
+const PRE_GET = true;
+const NON_PRE_GET = false;
+
+const handle = async (
+  ctx,
+  queryFunc,
+  queryParams,
+  successCode,
+  successMessage,
+  failCode,
+  failMessage,
+  errorCode,
+  errorMessage,
+  preGet = NON_PRE_GET,
+) => {
+  try {
+    let result;
+    if (preGet === true) {
+      result = await queries.getSinglePoem(queryParams[0]);
+      await queryFunc(...queryParams);
+    } else {
+      result = await queryFunc(...queryParams);
+    }
+    debug('result = ', result);
+    if (result.length) {
+      ctx.status = successCode;
+      ctx.body = {status: 'success', data: result, message: successMessage};
+    } else {
+      ctx.status = failCode;
+      ctx.body = {status: 'fail', message: failMessage};
+    }
+  } catch (err) {
+    ctx.status = errorCode;
+    ctx.body = {status: 'error', message: err.message || errorMessage};
+  }
+};
+
+const handleGetPoems = async ctx =>
+  handle(
+    ctx,
+    queries.getAllPoems,
+    [],
+    CODE.OK,
+    'Here are all the poems.',
+    CODE.NOT_FOUND,
+    'There are no poems.',
+    CODE.BAD_REQUEST,
+    MESSAGE.ERROR,
+  );
+
+const handleGetPoem = async ctx =>
+  handle(
+    ctx,
+    queries.getSinglePoem,
+    [ctx.params.id],
+    CODE.OK,
+    'Here is the requested poem.',
+    CODE.NOT_FOUND,
+    'The poem does not exist.',
+    CODE.BAD_REQUEST,
+    MESSAGE.ERROR,
+  );
+
+const handlePostPoem = async ctx =>
+  handle(
+    ctx,
+    queries.addPoem,
+    [ctx.request.body],
+    CODE.CREATED,
+    'The poem has been posted successfully.',
+    CODE.NOT_ACCEPTABLE,
+    'One or more fields are missing.',
+    CODE.BAD_REQUEST,
+    MESSAGE.ERROR,
+  );
+
+const handlePatchPoem = async ctx =>
+  handle(
+    ctx,
+    queries.updatePoem,
+    [ctx.params.id, ctx.request.body],
+    CODE.ACCEPTED,
+    'The poem has been patched successfully.',
+    CODE.NOT_FOUND,
+    'The poem does not exist.',
+    CODE.BAD_REQUEST,
+    MESSAGE.ERROR,
+  );
+
+const handleDeletePoem = async ctx =>
+  handle(
+    ctx,
+    queries.deletePoem,
+    [ctx.params.id],
+    CODE.ACCEPTED,
+    'The poem has been deleted successfully.',
+    CODE.NOT_FOUND,
+    'The poem does not exist.',
+    CODE.BAD_REQUEST,
+    MESSAGE.ERROR,
+    PRE_GET,
+  );
 
 poemsRouter
-  .get(BASE_URL, async ctx => {
-    debug(`Receive GET on ${BASE_URL}`);
-    try {
-      const poems = await queries.getAllPoems();
-      ctx.body = {status: 'success', data: poems};
-    } catch (err) {
-      debug('Error: ', err);
-      ctx.status = 404;
-    }
-  })
-  .get(`${BASE_URL}/:id`, async ctx => {
-    debug(`Receive GET on ${BASE_URL}/${ctx.params.id}`);
-    try {
-      const poem = await queries.getSinglePoem(ctx.params.id);
-      if (poem.length) {
-        ctx.body = {status: 'success', data: poem};
-      } else {
-        ctx.status = 404;
-        ctx.body = {status: 'error', message: 'The poem does not exist.'};
-      }
-    } catch (err) {
-      debug('Error: ', err);
-      ctx.status = 404;
-      ctx.body = {status: 'error', message: 'Wrong request.'};
-    }
-  })
-  .post(BASE_URL, async ctx => {
-    debug(`Receive POST on ${BASE_URL}`);
-    try {
-      const poem = await queries.addPoem(ctx.request.body);
-      if (poem.length) {
-        ctx.status = 201;
-        ctx.body = {status: 'success', data: poem};
-      } else {
-        ctx.status = 400;
-        ctx.body = {status: 'error', message: 'Something went wrong.'};
-      }
-    } catch (err) {
-      debug('Error: ', err);
-      ctx.status = 400;
-      ctx.body = {
-        status: 'error',
-        message: err.message || 'Sorry, an error has occurred.',
-      };
-    }
-  })
-  .patch(`${BASE_URL}/:id`, async ctx => {
-    debug(`Receive PATCH on ${BASE_URL}/${ctx.params.id}`);
-    try {
-      const poem = await queries.updatePoem(ctx.params.id, ctx.request.body);
-      if (poem.length) {
-        ctx.status = 202;
-        ctx.body = {status: 'success', data: poem};
-      } else {
-        ctx.status = 400;
-        ctx.body = {status: 'error', message: 'Something went wrong.'};
-      }
-    } catch (err) {
-      debug('Error: ', err);
-      ctx.status = 400;
-      ctx.body = {
-        status: 'error',
-        message: err.message || 'Sorry, an error has occurred.',
-      };
-    }
-  });
+  .get(BASE_URL, handleGetPoems)
+  .get(`${BASE_URL}/:id`, handleGetPoem)
+  .post(BASE_URL, handlePostPoem)
+  .patch(`${BASE_URL}/:id`, handlePatchPoem)
+  .delete(`${BASE_URL}/:id`, handleDeletePoem);
 
 export default poemsRouter;

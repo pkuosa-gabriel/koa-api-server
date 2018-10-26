@@ -27,6 +27,7 @@ afterEach(() => {
   server.close();
   debug('Server shut down!');
 });
+
 describe('routes: poems', () => {
   test('GET all poems via /api/v1/poems', async () => {
     const response = await request(server).get('/api/v1/poems');
@@ -95,5 +96,30 @@ describe('routes: poems', () => {
     expect(Object.keys(response.body.data[0]).sort()).toEqual(
       ['id', 'name', 'author', 'votes', 'created_at', 'updated_at'].sort(),
     );
+  });
+
+  test('PATCH a non-existing poem via /api/v1/poems/:id', async () => {
+    const response = await request(server)
+      .patch('/api/v1/poems/999')
+      .send({name: 'Test' + uuid.v1()});
+    expect(response.status).toEqual(404);
+    expect(response.type).toEqual('application/json');
+    expect(response.body.message).toEqual('The poem does not exist.');
+  });
+
+  test('DELETE a poem via /api/v1/poems/:id', async () => {
+    const response = await request(server).delete('/api/v1/poems/1');
+    expect(response.status).toEqual(202);
+    expect(response.type).toEqual('application/json');
+    expect(response.body.message).toEqual(
+      'The poem has been deleted successfully.',
+    );
+  });
+
+  test('DELETE a non-existing poem via /api/v1/poems/:id', async () => {
+    const response = await request(server).delete('/api/v1/poems/999');
+    expect(response.status).toEqual(404);
+    expect(response.type).toEqual('application/json');
+    expect(response.body.message).toEqual('The poem does not exist.');
   });
 });
