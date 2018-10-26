@@ -33,7 +33,7 @@ describe('routes: poems', () => {
     expect(response.status).toEqual(200);
     expect(response.type).toEqual('application/json');
     expect(Object.keys(response.body.data[0]).sort()).toEqual(
-      ['id', 'name', 'author', 'votes'].sort(),
+      ['id', 'name', 'author', 'votes', 'created_at', 'updated_at'].sort(),
     );
   });
 
@@ -42,7 +42,7 @@ describe('routes: poems', () => {
     expect(response.status).toEqual(200);
     expect(response.type).toEqual('application/json');
     expect(Object.keys(response.body.data[0]).sort()).toEqual(
-      ['id', 'name', 'author', 'votes'].sort(),
+      ['id', 'name', 'author', 'votes', 'created_at', 'updated_at'].sort(),
     );
   });
 
@@ -60,7 +60,17 @@ describe('routes: poems', () => {
     expect(response.status).toEqual(201);
     expect(response.type).toEqual('application/json');
     expect(Object.keys(response.body.data[0]).sort()).toEqual(
-      ['id', 'name', 'author', 'votes'].sort(),
+      ['id', 'name', 'author', 'votes', 'created_at', 'updated_at'].sort(),
+    );
+  });
+
+  test('POST nothing via /api/v1/poems', async () => {
+    const response = await request(server).post('/api/v1/poems');
+    expect(response.status).toEqual(400);
+    expect(response.type).toEqual('application/json');
+    debug(response.body.data);
+    expect(response.body.message).toEqual(
+      'insert into "poems" default values returning * - null value in column "name" violates not-null constraint',
     );
   });
 
@@ -71,6 +81,8 @@ describe('routes: poems', () => {
     expect(response.status).toEqual(400);
     expect(response.type).toEqual('application/json');
     debug(response.body.data);
-    expect(response.body.message).toEqual('Something went wrong.');
+    expect(response.body.message).toEqual(
+      'insert into "poems" ("name") values ($1) returning * - null value in column "author" violates not-null constraint',
+    );
   });
 });

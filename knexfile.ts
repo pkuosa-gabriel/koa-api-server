@@ -5,8 +5,7 @@ const BASE_PATH = path.join(__dirname, 'src', 'server', 'db');
 // TODO: replace connection addresses with environment variables
 export const development = {
   client: 'pg',
-  connection:
-    'postgresql://uo0x3uir8nufcoy5nvft:EhU5TbtMQ1c9LjSrZiCr@b9xasdiuuy900yf-postgresql.services.clever-cloud.com:5432/b9xasdiuuy900yf',
+  connection: 'postgres://gabriel@localhost:5432/koa_api',
   migrations: {
     directory: path.join(BASE_PATH, 'migrations'),
     extensions: ['js', 'ts'],

@@ -50,7 +50,10 @@ poemsRouter
     } catch (err) {
       debug('Error: ', err);
       ctx.status = 400;
-      ctx.body = {status: 'error', message: 'Something went wrong.'};
+      ctx.body = {
+        status: 'error',
+        message: err.message || 'Sorry, an error has occurred.',
+      };
     }
   });
 
