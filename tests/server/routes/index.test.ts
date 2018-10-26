@@ -1,6 +1,7 @@
 import Debug from 'debug';
 import request from 'supertest';
-import server from '../../src/server/index';
+import {CODE} from '../../../src/common/response';
+import server from '../../../src/server/index';
 
 const debug = Debug('test:index');
 afterEach(() => {
@@ -10,7 +11,7 @@ afterEach(() => {
 describe('routes: index', () => {
   test('GET hello-world via /', async () => {
     const response = await request(server).get('/');
-    expect(response.status).toEqual(200);
+    expect(response.status).toEqual(CODE.OK);
     expect(response.type).toEqual('application/json');
     expect(response.body.message).toEqual('Hello World!');
   });
