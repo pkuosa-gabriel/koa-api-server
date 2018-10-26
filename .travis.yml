@@ -6,6 +6,7 @@ branches:
   only:
   - master
   - production
+  - /^greenkeeper/.*$/
 
 cache:
   directories:
