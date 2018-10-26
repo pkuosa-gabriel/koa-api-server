@@ -19,7 +19,7 @@ COPY yarn.lock .
 FROM base AS dependencies
 
 # install node modules
-RUN apk add --no-cache python make
+# RUN apk add --no-cache python make
 RUN yarn install --production
 
 # copy production node_modules aside
@@ -45,4 +45,4 @@ COPY . .
 # Expose the listening port of your app
 EXPOSE 3000
 
-CMD [ "pm2", "start", "ecosystem.config.js"]
+CMD [ "pm2-runtime", "start", "ecosystem.config.js"]
