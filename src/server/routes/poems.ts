@@ -21,7 +21,7 @@ poemsRouter
     }
   })
   .get(`${BASE_URL}/:id`, async ctx => {
-    debug(`Receive GET on ${BASE_URL}/:id`);
+    debug(`Receive GET on ${BASE_URL}/${ctx.params.id}`);
     try {
       const poem = await queries.getSinglePoem(ctx.params.id);
       if (poem.length) {
@@ -42,6 +42,26 @@ poemsRouter
       const poem = await queries.addPoem(ctx.request.body);
       if (poem.length) {
         ctx.status = 201;
+        ctx.body = {status: 'success', data: poem};
+      } else {
+        ctx.status = 400;
+        ctx.body = {status: 'error', message: 'Something went wrong.'};
+      }
+    } catch (err) {
+      debug('Error: ', err);
+      ctx.status = 400;
+      ctx.body = {
+        status: 'error',
+        message: err.message || 'Sorry, an error has occurred.',
+      };
+    }
+  })
+  .patch(`${BASE_URL}/:id`, async ctx => {
+    debug(`Receive PATCH on ${BASE_URL}/${ctx.params.id}`);
+    try {
+      const poem = await queries.updatePoem(ctx.params.id, ctx.request.body);
+      if (poem.length) {
+        ctx.status = 202;
         ctx.body = {status: 'success', data: poem};
       } else {
         ctx.status = 400;

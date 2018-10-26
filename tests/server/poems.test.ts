@@ -85,4 +85,15 @@ describe('routes: poems', () => {
       'insert into "poems" ("name") values ($1) returning * - null value in column "author" violates not-null constraint',
     );
   });
+
+  test('PATCH a poem via /api/v1/poems/:id', async () => {
+    const response = await request(server)
+      .patch('/api/v1/poems/1')
+      .send({name: 'Test' + uuid.v1()});
+    expect(response.status).toEqual(202);
+    expect(response.type).toEqual('application/json');
+    expect(Object.keys(response.body.data[0]).sort()).toEqual(
+      ['id', 'name', 'author', 'votes', 'created_at', 'updated_at'].sort(),
+    );
+  });
 });

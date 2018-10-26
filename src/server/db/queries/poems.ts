@@ -6,6 +6,15 @@ function addPoem(poem) {
     .returning('*');
 }
 
+function updatePoem(id, poem) {
+  return knex('poems')
+    .select('*')
+    .where({id: parseInt(id, 10)})
+    .update(poem)
+    .update('updated_at', knex.fn.now())
+    .returning('*');
+}
+
 function getAllPoems() {
   return knex('poems').select('*');
 }
@@ -18,6 +27,7 @@ function getSinglePoem(id) {
 
 const queries = {
   addPoem,
+  updatePoem,
   getAllPoems,
   getSinglePoem,
 };
