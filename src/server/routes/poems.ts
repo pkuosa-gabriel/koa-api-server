@@ -1,3 +1,6 @@
+// Need to explicitly import koaBody otherwise dev server cannot be started.
+import koaBody from 'koa-body';
+
 import Debug from 'debug';
 import Router from 'koa-router';
 import queries from '../db/queries/poems';
@@ -30,6 +33,7 @@ poemsRouter
     } catch (err) {
       debug('Error: ', err);
       ctx.status = 404;
+      ctx.body = {status: 'error', message: 'Wrong request.'};
     }
   })
   .post(BASE_URL, async ctx => {
@@ -46,6 +50,7 @@ poemsRouter
     } catch (err) {
       debug('Error: ', err);
       ctx.status = 400;
+      ctx.body = {status: 'error', message: 'Something went wrong.'};
     }
   });
 

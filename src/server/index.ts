@@ -24,7 +24,7 @@ app.use(poemsRouter.routes());
 let server;
 if (process.env.NODE_ENV !== 'test') {
   server = app.listen(port, () => {
-    debug(`Server running on port ${port}`);
+    debug(`Server running on port ${port} in ${process.env.NODE_ENV} mode`);
   });
 } else {
   server = app.listen();

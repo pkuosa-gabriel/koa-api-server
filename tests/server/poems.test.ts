@@ -59,9 +59,18 @@ describe('routes: poems', () => {
       .send({name: 'Test' + uuid.v1(), author: 'Test Author', votes: 6});
     expect(response.status).toEqual(201);
     expect(response.type).toEqual('application/json');
-    debug(response.body.data);
     expect(Object.keys(response.body.data[0]).sort()).toEqual(
       ['id', 'name', 'author', 'votes'].sort(),
     );
+  });
+
+  test('POST a malformed poem via /api/v1/poems', async () => {
+    const response = await request(server)
+      .post('/api/v1/poems')
+      .send({name: 'Test' + uuid.v1()});
+    expect(response.status).toEqual(400);
+    expect(response.type).toEqual('application/json');
+    debug(response.body.data);
+    expect(response.body.message).toEqual('Something went wrong.');
   });
 });
