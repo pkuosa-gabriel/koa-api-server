@@ -5,6 +5,7 @@ node_js:
 branches:
   only:
   - master
+  - production
 
 cache:
   directories:
@@ -20,4 +21,4 @@ deploy:
     script: sh deploy/now.sh
     skip_cleanup: true
     on:
-      branch: master
+      branch: production
