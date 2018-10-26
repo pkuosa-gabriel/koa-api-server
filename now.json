@@ -1,6 +1,7 @@
 {
   "name": "koa-api-server",
   "alias": "koa-api-server",
+  "type": "docker",
   "public": false,
   "scale": {
     "sfo": {
