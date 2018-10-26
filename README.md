@@ -1,6 +1,7 @@
 # koa-api-server (Code name: _fugacious_)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![codecov](https://codecov.io/gh/pkuosa-gabriel/koa-api-server/branch/master/graph/badge.svg)](https://codecov.io/gh/pkuosa-gabriel/koa-api-server)
 
 A simple RESTful API server based on [koa.js](https://github.com/koajs/koa).
 
