@@ -3,7 +3,7 @@ import koaBody from 'koa-body';
 
 import Debug from 'debug';
 import Router from 'koa-router';
-import {CODE, MESSAGE} from '../../../common/response';
+import {CODE, MESSAGE} from '../../common/response';
 import queries from '../db/queries/poems';
 
 const debug = Debug('fugacious:poems');
