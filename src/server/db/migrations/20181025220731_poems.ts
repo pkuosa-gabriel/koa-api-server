@@ -8,10 +8,7 @@ exports.up = (knex, Promise) => {
       .notNullable()
       .unique();
     table.string('author').notNullable();
-    table
-      .integer('votes')
-      .notNullable()
-      .defaultTo(0);
+    table.integer('votes').defaultTo(0);
     table.timestamp('created_at').defaultTo(knex.fn.now());
     table.timestamp('updated_at').defaultTo(knex.fn.now());
   });
