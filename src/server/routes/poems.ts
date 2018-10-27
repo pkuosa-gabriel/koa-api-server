@@ -7,8 +7,9 @@ import {CODE, MESSAGE} from '../../common/response';
 import queries from '../db/queries/poems';
 
 const debug = Debug('fugacious:poems');
-const poemsRouter = new Router();
-const BASE_URL = `/api/v1/poems`;
+const poemsRouter = new Router({
+  prefix: '/api/v1/poems',
+});
 const PRE_GET = true;
 const NON_PRE_GET = false;
 
@@ -113,10 +114,10 @@ const handleDeletePoem = async ctx =>
   );
 
 poemsRouter
-  .get(BASE_URL, handleGetPoems)
-  .get(`${BASE_URL}/:id`, handleGetPoem)
-  .post(BASE_URL, handlePostPoem)
-  .patch(`${BASE_URL}/:id`, handlePatchPoem)
-  .delete(`${BASE_URL}/:id`, handleDeletePoem);
+  .get('/', handleGetPoems)
+  .get('/:id', handleGetPoem)
+  .post('/', handlePostPoem)
+  .patch('/:id', handlePatchPoem)
+  .delete('/:id', handleDeletePoem);
 
 export default poemsRouter;
