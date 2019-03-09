@@ -41,7 +41,7 @@
     "lint-staged": "^8.0.0",
     "nodemon": "^1.18.4",
     "prettier": "^1.14.3",
-    "supertest": "^3.3.0",
+    "supertest": "^4.0.0",
     "ts-jest": "^23.10.4",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
