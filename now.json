@@ -1,15 +1,7 @@
 {
+  "version": 2,
   "name": "koa-api-server",
   "alias": "koa-api-server",
-  "type": "docker",
-  "public": false,
-  "scale": {
-    "sfo": {
-      "min": 0,
-      "max": 1
-    }
-  },
-  "features": {
-    "cloud": "v2"
-  }
+  "builds": [{"src": "src/server/index.ts", "use": "@now/node-server"}],
+  "routes": [{"src": "/.*", "dest": "src/server/index.ts"}]
 }
