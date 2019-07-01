@@ -38,7 +38,7 @@
     "husky": "^2.7.0",
     "jest": "^24.8.0",
     "koa-webpack": "^5.2.3",
-    "lint-staged": "^8.2.1",
+    "lint-staged": "^9.0.0",
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
     "supertest": "^4.0.2",
