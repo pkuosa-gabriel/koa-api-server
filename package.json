@@ -7,7 +7,7 @@
   "author": "Gabriel Wu <qqbbnease1004@126.com>",
   "license": "MIT",
   "dependencies": {
-    "@babel/polyfill": "^7.7.0",
+    "@babel/polyfill": "^7.8.7",
     "debug": "^4.1.1",
     "knex": "^0.20.4",
     "koa": "^2.11.0",
